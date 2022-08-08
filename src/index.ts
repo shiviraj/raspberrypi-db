@@ -1,2 +1,3 @@
-const isHomeAutomation = (txt: string): boolean => txt === "home-automation"
-export {isHomeAutomation}
+import {PiClient} from './pi/piClient'
+
+export {PiClient}
