@@ -1,1 +1,2 @@
-export const isHomeAutomation = (txt: string): boolean => txt === "home-automation"
+const isHomeAutomation = (txt: string): boolean => txt === "home-automation"
+export {isHomeAutomation}
