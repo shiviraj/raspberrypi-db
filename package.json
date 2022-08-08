@@ -1,0 +1,36 @@
+{
+  "name": "raspberrypi-db",
+  "version": "1.0.0",
+  "description": "An alternate of mongodb for raspberrypi",
+  "type": "module",
+  "types": "lib/index.d.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf lib && tsc && npm run build:types",
+    "build:types": "tsc -p tsconfig.types.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiviraj/raspberrypi-db.git"
+  },
+  "keywords": [
+    "raspberrypi-db",
+    "rpi-db"
+  ],
+  "files": [
+    "lib"
+  ],
+  "author": "Shivam Rajput",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiviraj/raspberrypi-db/issues"
+  },
+  "homepage": "https://github.com/shiviraj/raspberrypi-db#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
