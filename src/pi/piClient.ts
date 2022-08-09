@@ -15,7 +15,7 @@ class PiClient {
             try {
                 const [protocol, url] = this.fullUrl.split("//")
                 const [baseUrl, auth = ""] = url.split("@").reverse()
-                this.url = protocol + baseUrl
+                this.url = `${protocol}//${baseUrl}`
                 this.auth = auth
                 this.isConnected = true
                 resolve(true)

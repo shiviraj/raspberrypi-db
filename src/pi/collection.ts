@@ -1,6 +1,8 @@
 import {DB} from "./db";
 import {CollectionAPI} from "../api/collection"
 
+export type Document = {}
+
 class Collection {
     private readonly collectionName: string;
     private db: DB;
@@ -18,15 +20,15 @@ class Collection {
         this.collectionAPI.create().catch()
     }
 
-    insertMany(collections: Array<Map<string, any>>) {
+    insertMany(collections: Array<Document>) {
         return this.collectionAPI.insertMany(collections)
     }
 
-    insertOne(collection: Map<string, any>): Promise<Map<string, any>> {
+    insertOne(collection: Document): Promise<Document> {
         return this.collectionAPI.insertOne(collection)
     }
 
-    findAll(): Promise<Array<any>> {
+    findAll(): Promise<Array<Document>> {
         return this.collectionAPI.findAll()
     }
 }

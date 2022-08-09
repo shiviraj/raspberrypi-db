@@ -1,5 +1,5 @@
-import adapter, {Config} from './adapter';
-import {Headers} from "./adapter";
+import adapter, {Config, Headers} from './adapter';
+import {Document} from "../pi/collection";
 
 class DatabaseAPI {
     private readonly baseUrl: string;
@@ -10,9 +10,9 @@ class DatabaseAPI {
         this.baseUrl = baseUrl
     }
 
-    create() {
+    create(): Promise<Document> {
         const options: Config = {method: 'POST'};
-        return this.fetch(`${this.baseUrl}/create/database`, options);
+        return this.fetch(`${this.baseUrl}/create/database`, options) as Promise<Document>;
     }
 }
 

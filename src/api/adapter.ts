@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export type Config = { method: string, data?: Map<string, any> | Array<any>, headers?: Map<string, string> }
+export type Config = { method: string, data?: { payload: any }, headers?: Map<string, string> }
 export type Headers = { authorization: string, databasename: string, collectionname: string }
 
 const adapter = (defaultHeaders: Headers) => ({
