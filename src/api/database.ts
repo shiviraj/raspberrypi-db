@@ -12,7 +12,13 @@ class DatabaseAPI {
 
     create(): Promise<Document> {
         const options: Config = {method: 'POST'};
-        return this.fetch(`${this.baseUrl}/create/database`, options) as Promise<Document>;
+        return this.fetch(`${this.baseUrl}/database`, options) as Promise<Document>;
+    }
+
+    drop(): Promise<Document> {
+        const options: Config = {method: 'DELETE'};
+        return this.fetch(`${this.baseUrl}/database`, options) as Promise<Document>;
+
     }
 }
 

@@ -21,8 +21,15 @@ async function main() {
     await collection.insertMany([{"name": "shiviraj"}])
 
     // find all from the collection
-    const data = await collection.findAll()
-    console.log(data)
+    console.log(await collection.find({"name": "shiviraj"}))
+    console.log(await collection.find({"invalid": "shiviraj"}), "invalid key for find many")
+
+    // find-one
+    console.log(await collection.findOne({"name": "shiviraj"}), "find one")
+    console.log(await collection.findOne({"name": "unknown"}) || null, "find one unknown")
+    console.log(await collection.findOne({"invalid": "unknown"}) || null, "find one with invalid key")
+
+
     return 'done.';
 }
 
