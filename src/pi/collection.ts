@@ -38,7 +38,7 @@ class Collection {
     }
 
     findById(_id: String): Promise<Document | null> {
-        return this.collectionAPI.findOne({_id})
+        return this.collectionAPI.findOne({_id}, false)
     }
 
     updateMany(query: Document, document: { $set: Document }): Promise<Array<Document>> {

@@ -1,7 +1,6 @@
 import adapter, {Config} from './adapter';
 import {Headers} from "./adapter"
 import {Document} from "../pi/collection";
-import RaspberrypiServerError from "./RaspberrypiServerError";
 
 class CollectionAPI {
     private readonly baseUrl: string;
@@ -37,8 +36,8 @@ class CollectionAPI {
         return this.fetch(`${this.baseUrl}/find`, options) as Promise<Array<Document>>
     }
 
-    findOne(query: Document): Promise<Document | null> {
-        const options: Config = {method: 'POST', data: {payload: query}};
+    findOne(query: Document, exact:boolean=true): Promise<Document | null> {
+        const options: Config = {method: 'POST', data: {payload: {query, exact}}};
         return this.fetch(`${this.baseUrl}/find-one`, options) as Promise<Document | null>
     }
 
