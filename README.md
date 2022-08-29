@@ -5,7 +5,7 @@
 - You need to start raspberrypi-db-server [click here](https://github.com/shiviraj/raspberrypi-db-server#readme) to know how to start raspberrypi-db-server.
 - you need to install raspberrypi-db by using `npm i raspberrypi-db` and use it into your project. 
 
-## Example
+## Example~~~~
 
 ```javascript
 const {PiClient} = require("raspberrypi-db")

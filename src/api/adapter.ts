@@ -5,14 +5,14 @@ export type Config = { method: string, data?: { payload: any }, headers?: Map<st
 export type Headers = { authorization: string, databasename: string, collectionname: string }
 
 const adapter = (defaultHeaders: Headers) => ({
-    fetch(url: string, config: Config = {method: "GET"}): Promise<Map<string, any> | Array<any>> {
-        return new Promise((resolve, reject) => {
-            const headers: any = {...defaultHeaders, ...config.headers}
-            axios({url, ...config, headers})
-                .then((res) => resolve(res.data))
-                .catch((error) => reject(new RaspberrypiServerError(error.response?.data || {message: "some error occurred"})));
-        });
-    }
+  fetch(url: string, config: Config = {method: "GET"}): Promise<Map<string, any> | Array<any>> {
+    return new Promise((resolve, reject) => {
+      const headers: any = {...defaultHeaders, ...config.headers}
+      axios({url, ...config, headers})
+        .then((res) => resolve(res.data))
+        .catch((error) => reject(new RaspberrypiServerError(error.response?.data || {message: "some error occurred"})));
+    });
+  }
 })
 
 
