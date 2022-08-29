@@ -1,6 +1,6 @@
 {
   "name": "raspberrypi-db",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "An alternate of mongodb for raspberrypi",
   "types": "lib/index.d.js",
   "main": "lib/index.js",
