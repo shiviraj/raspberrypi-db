@@ -1,23 +1,23 @@
 import adapter, {Config, Headers} from './adapter';
-import {Document} from "../pi/collection";
+import {Document} from "./collection";
 
-class DatabaseAPI {
+class DatabaseAPI<T extends Document> {
   private readonly baseUrl: string;
-  private readonly fetch: (url: string, config?: Config) => Promise<Map<string, any> | Array<any>>;
+  private readonly fetch: <S>(url: string, config?: Config) => Promise<S>;
 
   constructor(baseUrl: string, headers: Headers) {
     this.fetch = adapter(headers).fetch
     this.baseUrl = baseUrl
   }
 
-  create(): Promise<Document> {
+  create(): Promise<T> {
     const options: Config = {method: 'POST'};
-    return this.fetch(`${this.baseUrl}/database`, options) as Promise<Document>;
+    return this.fetch<T>(`${this.baseUrl}/database`, options)
   }
 
-  drop(): Promise<Document> {
+  drop(): Promise<T> {
     const options: Config = {method: 'DELETE'};
-    return this.fetch(`${this.baseUrl}/database`, options) as Promise<Document>;
+    return this.fetch<T>(`${this.baseUrl}/database`, options)
 
   }
 }

@@ -1,11 +1,12 @@
 import {PiClient} from "./piClient";
-import {Collection, Document} from "./collection";
+import {Collection} from "./collection";
 import {DatabaseAPI} from "../api/database"
+import {Document} from "../api/collection";
 
 class DB {
   readonly databaseName: string;
   piClient: PiClient;
-  private databaseApi: DatabaseAPI;
+  private databaseApi: DatabaseAPI<Document>;
 
   constructor(databaseName: string, piClient: PiClient) {
     this.databaseName = databaseName
@@ -18,8 +19,8 @@ class DB {
     this.databaseApi.create().catch()
   }
 
-  collection(collectionName: string) {
-    return new Collection(collectionName, this)
+  collection<T>(collectionName: string) {
+    return new Collection<T>(collectionName, this)
   }
 
   dropDatabase(): Promise<Document> {

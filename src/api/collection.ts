@@ -1,9 +1,10 @@
 import adapter, {Config, Headers} from './adapter';
-import {Document} from "../pi/collection";
 
-class CollectionAPI {
+export type Document = Record<string, any>
+
+class CollectionAPI<T> {
   private readonly baseUrl: string;
-  private readonly fetch: (url: string, config?: Config) => Promise<Document | Array<Document>>;
+  private readonly fetch: <S>(url: string, config?: Config) => Promise<S>;
 
   constructor(baseUrl: string, headers: Headers) {
     this.fetch = adapter(headers).fetch
@@ -12,52 +13,52 @@ class CollectionAPI {
 
   create(): Promise<Document> {
     const options: Config = {method: 'POST'};
-    return this.fetch(`${this.baseUrl}/collection`, options) as Promise<Document>;
+    return this.fetch(`${this.baseUrl}/collection`, options)
   }
 
   drop(): Promise<Document> {
     const options: Config = {method: 'DELETE'};
-    return this.fetch(`${this.baseUrl}/collection`, options) as Promise<Document>;
+    return this.fetch(`${this.baseUrl}/collection`, options)
   }
 
-  insertMany(collections: Array<Document>): Promise<Document> {
+  insertMany(collections: Array<T>): Promise<Array<T>> {
     const options: Config = {method: 'POST', data: {payload: collections}};
-    return this.fetch(`${this.baseUrl}/insert-many`, options) as Promise<Document>
+    return this.fetch<Array<T>>(`${this.baseUrl}/insert-many`, options)
   }
 
-  insertOne(collection: Document): Promise<Document> {
+  insertOne(collection: T): Promise<T> {
     const options: Config = {method: 'POST', data: {payload: collection}};
-    return this.fetch(`${this.baseUrl}/insert-one`, options) as Promise<Document>
+    return this.fetch<T>(`${this.baseUrl}/insert-one`, options)
   }
 
-  find(query: Document): Promise<Array<Document>> {
+  find(query: Document): Promise<Array<T>> {
     const options: Config = {method: 'POST', data: {payload: query}};
-    return this.fetch(`${this.baseUrl}/find`, options) as Promise<Array<Document>>
+    return this.fetch<Array<T>>(`${this.baseUrl}/find`, options)
   }
 
-  findOne(query: Document, exact: boolean = true): Promise<Document | null> {
+  findOne(query: Document, exact: boolean = true): Promise<T | null> {
     const options: Config = {method: 'POST', data: {payload: {query, exact}}};
-    return this.fetch(`${this.baseUrl}/find-one`, options) as Promise<Document | null>
+    return this.fetch<T>(`${this.baseUrl}/find-one`, options)
   }
 
-  updateOne(query: Document, document: Document) {
+  updateOne(query: Document, document: T): Promise<T> {
     const options: Config = {method: 'PUT', data: {payload: {query, document}}};
-    return this.fetch(`${this.baseUrl}/update-one`, options) as Promise<Document | null>
+    return this.fetch<T>(`${this.baseUrl}/update-one`, options)
   }
 
-  updateMany(query: Document, document: Document): Promise<Array<Document>> {
+  updateMany(query: Document, document: T): Promise<Array<T>> {
     const options: Config = {method: 'PUT', data: {payload: {query, $set: document}}};
-    return this.fetch(`${this.baseUrl}/update-many`, options) as Promise<Array<Document>>
+    return this.fetch<Array<T>>(`${this.baseUrl}/update-many`, options)
   }
 
-  deleteOne(query: Document, document: Document) {
+  deleteOne(query: Document, document: T): Promise<T> {
     const options: Config = {method: 'DELETE', data: {payload: {query, document}}};
-    return this.fetch(`${this.baseUrl}/delete-one`, options) as Promise<Document | null>
+    return this.fetch<T>(`${this.baseUrl}/delete-one`, options)
   }
 
-  deleteMany(query: Document, document: Document): Promise<Array<Document>> {
+  deleteMany(query: Document, document: T): Promise<Array<T>> {
     const options: Config = {method: 'DELETE', data: {payload: {query, $set: document}}};
-    return this.fetch(`${this.baseUrl}/delete-many`, options) as Promise<Array<Document>>
+    return this.fetch<Array<T>>(`${this.baseUrl}/delete-many`, options)
   }
 }
 
